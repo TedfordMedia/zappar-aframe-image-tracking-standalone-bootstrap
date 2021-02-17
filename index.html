@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="play-on-click.js"></script>
+    <script src="hide-on-play.js"></script>
+    <script src="https://cdn.rawgit.com/elbobo/aframe-multisrc-component/b6d23310/dist/0.3/aframe-multisrc-component.js"></script>
     <script src="https://libs.zappar.com/zappar-aframe/0.3.6/zappar-aframe.js"></script>
 
     <title>aZappar for A-Frame</title>
@@ -21,28 +24,93 @@
 <body>
     <a-scene>
         <a-assets>
-            <a-asset-item id="target-file" src="mallcut2b.zpt"/>
+            <video id="videoBunny" preload="auto"
+                    src="https://cdn.aframe.io/videos/bunny.mp4"
+                    width="160" height="90" autoplay loop="true"
+                    crossOrigin="anonymous" muted></video>
                     
-      
-                <img id="right" src="Zain cube side 1.png">
-                <img id="left" src="Zain cube side 2.png">
-                <img id="top" src="Zain cube side 1.png">
-                <img id="bottom" src="Zain cube side 2.png">
-                <img id="front" src="Zain cube side 1.png">
-                <img id="back"src="Zain cube side 2.png">
+            <video id="videoGuitar" preload="auto"
+                    src="guitar.mp4"
+                    width="160" height="90" autoplay loop="true"
+                    muted></video>
+
+                    <video id="videoFireworks" preload="auto"
+                    src="https://cdn.aframe.io/videos/fireworks.mp4"
+                    width="160" height="90"  muted loop="true"
+                    crossOrigin="anonymous"  ></video>
+            <a-asset-item id="target-file" src="mallcut2b.zpt"/> 
+            <img id="right" src="./data/images/Zain cube side 1.png">
+            <img id="left" src="./data/images/Zain cube side 2.png">
+            <img id="top" src="./data/images/Zain cube side 1.png">
+            <img id="bottom" src="./data/images/Zain cube side 2.png">
+            <img id="front" src="./data/images/Zain cube side 1.png">
+            <img id="back" src="./data/images/Zain cube side 2.png">
           
         </a-assets>
 
         <a-entity camera zappar-camera></a-entity>
+        <a-entity material="shader: flat; src: #videoBunny"
+                geometry="primitive: plane; width: 80; height: 45;"
+                position="0 60 -150"
+                rotation="0 35 0"
+                play-on-click
+                visible="false">
+        </a-entity>
+     
+        <a-entity
+        position="5 0 -1.5"
+        text="align: center;
+            width: 6;
+            wrapCount: 100;
+            color: black;
+            value: Click or tap to start video"
+        hide-on-play="#videoBunny">
+    </a-entity>
 
+            <a-entity
+            position="0 0 -1.5"
+            text="align: center;
+                width: 6;
+                wrapCount: 100;
+                color: black;
+                value: Click or tap to start video"
+            hide-on-play="#videoGuitar">
+        </a-entity>
         <a-entity zappar-image="target: #target-file" id="image-group">
 
             <!-- PLACE 3D OBJECTS HERE TO TRACK FROM THE CENTER OF THE IMAGE -->
-            <a-box position="0 0 0.5"></a-box>
+            <a-box id="mywhitebox" 
+            multisrc="srcs:#videoFireworks,#videoGuitar,#videoGuitar,#videoFireworks,#front,#back"
+            position="0 0 1.5"></a-box>
 
+            
+            <a-box 
+            position="0 1.5 -2" 
+            multisrc="srcs:#videoGuitar,#videoGuitar,#videoFireworks,#bottom,#videoFireworks,#back"
+            color="blue"
+            opacity="0.5"
+            shadow>
+          </a-box>
+          
+          <a-entity material="shader: flat; src: #videoFireworks"
+          geometry="primitive: plane; width: 35; height: 22.5"
+          position="0 2 2"
+          rotation="0 -35 0"
+          play-on-click
+          visible="false"> 
+          </a-entity>
+
+          <a-entity material="shader: flat; src: #videoGuitar"
+          geometry="primitive: plane; width: 7.0; height: 4.5"
+          position="0 -2 -2"
+          rotation="0 -35 0"
+          play-on-click
+          visible="false"> 
+          </a-entity>
         </a-entity>
 
         <script>
+            alert('123')
             let myImageGroup = document.getElementById("image-group");
 
             let imageVisible = false;
