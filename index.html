@@ -24,6 +24,7 @@
 <body>
     <a-scene>
         <a-assets>
+            <a-asset-item id="tree" src="darabase-cubeoid-v002.glb"></a-asset-item>
             <video id="videoBunny" preload="auto"
                     src="guitar.mp4"
                     width="160" height="90" autoplay loop="true"
@@ -89,21 +90,21 @@
             </a-entity>
             <!-- PLACE 3D OBJECTS HERE TO TRACK FROM THE CENTER OF THE IMAGE -->
             <a-box id="mywhitebox" 
-            scale=".5 0.28125 .5" 
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 30000"
-            multisrc="srcs:#videoFireworks,#videoGuitar,#videoGuitar,#videoFireworks,#front,#back"
-            position="0 1 -2"></a-box>
-
-            
+                scale=".5 0.28125 .5" 
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 30000"
+                multisrc="srcs:#videoFireworks,#videoGuitar,#videoGuitar,#videoFireworks,#front,#back"
+                position="0 1 -2"
+            ></a-box> 
             <a-box 
-            position="-1.5 1 -1" 
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 30000"
-            scale=".5 0.28125 .5" 
-            multisrc="srcs:#videoGuitar,#videoGuitar,#videoFireworks,#bottom,#videoFireworks,#back"
-            color="white" 
-            shadow>
-          </a-box>
-          
+                position="-1.5 1 -1" 
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 30000"
+                scale=".5 0.28125 .5" 
+                multisrc="srcs:#videoGuitar,#videoGuitar,#videoFireworks,#bottom,#videoFireworks,#back"
+                color="white" 
+                shadow>
+            </a-box>
+            <a-gltf-model src="#tree"
+            ></a-gltf-model>
         </a-entity>
 
 
