@@ -1,1 +1,5 @@
-alert('a')
+alert('a');
+
+//load gltf into-aframe
+
+
